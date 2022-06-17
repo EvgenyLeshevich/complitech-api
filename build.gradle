@@ -27,6 +27,7 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-ui:${versions.springdoc}"
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
+    implementation "com.auth0:java-jwt:${versions.javajwt}"
 
     runtimeOnly 'org.postgresql:postgresql'
 

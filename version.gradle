@@ -1,5 +1,6 @@
 ext {
     versions = [
-            'springdoc': '1.6.9'
+            'springdoc': '1.6.9',
+            'javajwt': '3.19.2'
     ]
 }
