@@ -58,4 +58,12 @@ public class UserController {
                 ? noContent().build()
                 : notFound().build();
     }
+
+    @Operation(summary = "Delete users whose ID is between \"from\" and \"to\"")
+    @GetMapping("/delete-between")
+    public ResponseEntity<?> deleteUsersWithIdBetween(Long from, Long to) {
+        return userService.deleteUsersWithIdBetween(from, to)
+                ? noContent().build()
+                : notFound().build();
+    }
 }

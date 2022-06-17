@@ -65,6 +65,16 @@ public class UserService implements UserDetailsService {
                 .orElse(false);
     }
 
+    @Transactional
+    public boolean deleteUsersWithIdBetween(Long from, Long to) {
+        if (userRepository.selectUsersWithIdBetween(from, to).size() == 0) {
+            return false;
+        } else {
+            userRepository.deleteUsersWithIdBetween(from, to);
+            return true;
+        }
+    }
+
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return userRepository.findByLogin(login)
