@@ -11,9 +11,15 @@ spring:
     properties.hibernate:
       format_sql: true
       hbm2ddl.auto: validate
+  mvc:
+    format:
+      date: iso
 
 jwt_secret: SECRET
 
 api:
   version: v1
   description: This API is a test task for Complitech.
+
+date_for_stop_app: 2022-06-18 10:44:30
+fixedRate: PT10M
