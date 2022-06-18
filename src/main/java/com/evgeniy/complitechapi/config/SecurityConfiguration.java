@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(urlConfig -> urlConfig
-                        .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/api/auth/**").permitAll()
+                        .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/api/auth/**", "/client/users/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .logout()
