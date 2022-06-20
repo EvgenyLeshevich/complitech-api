@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.noContent;
@@ -25,8 +26,8 @@ public class UserController {
 
     @Operation(summary = "Get all users")
     @GetMapping
-    public List<UserReadDto> findAll() {
-        return userService.findAll();
+    public List<UserReadDto> findAll(HttpServletRequest request) {
+        return userService.findAll(request);
     }
 
     @Operation(summary = "Get user by id")
@@ -60,7 +61,7 @@ public class UserController {
     }
 
     @Operation(summary = "Delete users whose ID is between \"from\" and \"to\"")
-    @GetMapping("/delete-between")
+    @DeleteMapping("/delete-between")
     public ResponseEntity<?> deleteUsersWithIdBetween(Long from, Long to) {
         return userService.deleteUsersWithIdBetween(from, to)
                 ? noContent().build()

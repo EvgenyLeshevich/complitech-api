@@ -1,11 +1,13 @@
 package com.evgeniy.complitechapi.service;
 
 import com.evgeniy.complitechapi.database.repository.UserRepository;
+import com.evgeniy.complitechapi.dto.MessageDto;
 import com.evgeniy.complitechapi.dto.UserCreateEditDto;
 import com.evgeniy.complitechapi.dto.UserReadDto;
 import com.evgeniy.complitechapi.mapper.UserCreateEditMapper;
 import com.evgeniy.complitechapi.mapper.UserReadMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +28,18 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final UserReadMapper userReadMapper;
     private final UserCreateEditMapper userCreateEditMapper;
+    private final SimpMessagingTemplate template;
 
-    public List<UserReadDto> findAll() {
+    public List<UserReadDto> findAll(HttpServletRequest request) {
+        String URI = request.getRequestURI();
+        String methodName = request.getMethod();
+        String activeUserName = request.getUserPrincipal().getName();
+        MessageDto message = MessageDto.builder()
+                .user(activeUserName)
+                .action("use request " + methodName + " " + URI)
+                .build();
+        template.convertAndSend("/topic/messages", message);
+
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
                 .toList();

@@ -1,6 +1,10 @@
 ext {
     versions = [
-            'springdoc': '1.6.9',
-            'javajwt': '3.19.2'
+            'springdoc'     : '1.6.9',
+            'javajwt'       : '3.19.2',
+            'sockjsclient'  : '1.0.2',
+            'stompwebsocket': '2.3.3',
+            'bootstrap'     : '3.3.7',
+            'jquery'        : '3.1.1-1'
     ]
 }
