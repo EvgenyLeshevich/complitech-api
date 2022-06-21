@@ -6,6 +6,7 @@ plugins {
 }
 apply from: 'version.gradle'
 
+archivesBaseName = 'complitech-api'
 group = 'com.evgeniy.complitech'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
