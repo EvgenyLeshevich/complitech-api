@@ -24,6 +24,7 @@ $ ./gradlew bootRun
 
 //dockerize
 
+$ ./gradlew build
 $ docker-compose up -d
 ```
 
